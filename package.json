@@ -2,6 +2,7 @@
   "name": "camel-security-demo",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://camel-security.github.io",
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
     "@testing-library/dom": "^10.4.1",
