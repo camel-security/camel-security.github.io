@@ -1,0 +1,49 @@
+# GitLab CI/CD Pipeline for CaMeL Security Demo
+# This will automatically build and deploy your React app to GitLab Pages
+
+stages:
+  - build
+  - deploy
+
+# Cache node_modules for faster builds
+cache:
+  paths:
+    - node_modules/
+
+# Build stage
+build:
+  stage: build
+  image: node:18-alpine
+  script:
+    # Install dependencies
+    - npm ci --only=production
+    # Build the React app
+    - npm run build
+    # Create a simple redirect for SPA routing
+    - echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=./index.html"></head></html>' > public/404.html
+  artifacts:
+    paths:
+      - public/
+    expire_in: 1 hour
+  only:
+    - main
+    - master
+
+# Deploy to GitLab Pages
+pages:
+  stage: deploy
+  image: alpine:latest
+  script:
+    # Copy built files to public directory
+    - cp -r public/* .
+    # Create .nojekyll file to disable Jekyll processing
+    - touch .nojekyll
+  artifacts:
+    paths:
+      - .
+    expire_in: never
+  only:
+    - main
+    - master
+  dependencies:
+    - build
