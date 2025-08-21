@@ -195,9 +195,8 @@ function App() {
                 {selectedScenario.untrustedData && (
                   <div>
                     <span className="text-xs font-semibold text-gray-700">Untrusted Data:</span>
-                    <div className="text-xs bg-white p-2 rounded mt-1 font-mono whitespace-pre-wrap">
-                      {selectedScenario.untrustedData.substring(0, 200)}
-                      {selectedScenario.untrustedData.length > 200 && '...'}
+                    <div className="text-xs bg-white p-2 rounded mt-1 font-mono whitespace-pre-wrap max-h-48 overflow-y-auto">
+                      {selectedScenario.untrustedData}
                     </div>
                   </div>
                 )}
