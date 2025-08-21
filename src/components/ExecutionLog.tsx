@@ -6,12 +6,14 @@ interface ExecutionLogProps {
   steps: ExecutionStep[];
   currentStep: number;
   stepByStep: boolean;
+  totalSteps?: number;
 }
 
 export const ExecutionLog: React.FC<ExecutionLogProps> = ({
   steps,
   currentStep,
-  stepByStep
+  stepByStep,
+  totalSteps
 }) => {
   const getStepIcon = (step: ExecutionStep) => {
     if (step.isBlocked) {
@@ -56,7 +58,7 @@ export const ExecutionLog: React.FC<ExecutionLogProps> = ({
         <h3 className="text-lg font-semibold text-gray-800">Execution Log</h3>
         {stepByStep && (
           <span className="ml-auto text-sm text-blue-600 font-medium">
-            Step {currentStep + 1} of {steps.length}
+            Step {currentStep + 1} of {totalSteps || steps.length}
           </span>
         )}
       </div>

@@ -275,6 +275,7 @@ function App() {
             }
             currentStep={state.currentStep}
             stepByStep={state.stepByStep}
+            totalSteps={state.executionSteps.length}
           />
           
           <CodeDisplay
